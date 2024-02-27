@@ -3,7 +3,7 @@ retrogenome
 
 ## Install
 
-Install blast-legacy from bioconda first
+Install blast from bioconda first
 
 
 ## Manifest
