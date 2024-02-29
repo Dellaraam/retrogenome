@@ -21,3 +21,14 @@ Install blast from bioconda first
 	+ CDS starts (semicolon delimited)
 	+ CDS ends (semicolon delimited)
 
+tblastn
+input: -query 
+library: -dp
+
+other arguments 
+-evalue 1e-30
+-max_intron_length 9999
+-sorthits 3
+-sorthsps 2
+-num_threads X
+-outfmt 7
