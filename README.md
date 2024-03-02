@@ -25,7 +25,7 @@ Install blast from bioconda first
  + input: -query 
  + library: -dp
 
-other arguments 
+#### other arguments 
   + evalue 1e-30
   + max_intron_length 9999
   + sorthits 3
