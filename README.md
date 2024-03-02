@@ -21,7 +21,7 @@ Install blast from bioconda first
 	+ CDS starts (semicolon delimited)
 	+ CDS ends (semicolon delimited)
 
-tblastn
+### tblastn
  + input: -query 
  + library: -dp
 
