@@ -20,15 +20,28 @@ Install blast from bioconda first
 	+ Strand (1, -1)
 	+ CDS starts (semicolon delimited)
 	+ CDS ends (semicolon delimited)
+	
 
-### tblastn
+## blast
+
++ tblastn
  + input: -query 
  + library: -dp
 
-#### other arguments 
++ other arguments 
   + evalue 1e-30
   + max_intron_length 9999
   + sorthits 3
   + sorthsps 2
   + num_threads X
   + outfmt 7
+  
+  
++ makeblastdb 
+	+ -in
+	+ -dbtype nucl/prot 
+  
+## ab-blast
++ ad-formatdb 
+	+ -i
+	+ -p T-protein F-nucl
