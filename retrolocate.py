@@ -13,5 +13,10 @@ with open(sys.argv[1]) as fp:
 		chromo = t[4]
 		starts = [int(s) for s in t[5].split(";")]
 		ends = [int(e) for e in t[6].split(";")]
-		print(sorted(starts),sorted(ends))
+		starts.sort()
+		ends.sort()
+		start = starts[0]
+		end = ends[-1]
+		print(start, end, line)
+		
 			
