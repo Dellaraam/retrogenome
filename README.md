@@ -25,8 +25,8 @@ Install blast from bioconda first
 ## blast
 
 + tblastn
- + input: -query 
- + library: -dp
+	+ input: -query 
+	+ library: -dp
 
 + other arguments 
   + evalue 1e-30
