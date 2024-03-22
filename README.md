@@ -31,8 +31,6 @@ Install blast from bioconda first
 + other arguments 
   + evalue 1e-30
   + max_intron_length 9999
-  + sorthits 3
-  + sorthsps 2
   + num_threads X
   + outfmt 7
   
@@ -42,6 +40,11 @@ Install blast from bioconda first
 	+ -dbtype nucl/prot 
   
 ## ab-blast
-+ ad-formatdb 
-	+ -i
-	+ -p T-protein F-nucl
++ xbformat 
+	+ -n for nucle then "database"
+	
++ -topcomboN=20
++ -hspsepsmax=# (A.thaliana 2000)
++ -cpus=8
++ -E 
++ -mformat 2 maybe 3
