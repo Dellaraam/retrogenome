@@ -1,12 +1,6 @@
-
 import argparse
 import sys
 import grimoire.genome
-
-#from grimoire.sequence import DNA
-#from grimoire.feature import Feature, mRNA, Gene, FeatureTable
-#from grimoire.genome import Reader
-#import grimoire.io as gio
 
 ## Command line stuff ##
 
