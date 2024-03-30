@@ -4,6 +4,7 @@ retrogenome
 ## Install
 
 Install blast from bioconda first
+Install ab-blast for Advanced Bioinformatics 
 
 
 ## Manifest
@@ -42,9 +43,28 @@ Install blast from bioconda first
 ## ab-blast
 + xbformat 
 	+ -n for nucle then "database"
-	
-+ -topcomboN=20
-+ -hspsepsmax=# (A.thaliana 2000)
-+ -cpus=8
-+ -E 
-+ -mformat 2 maybe 3
+
++ tblastn*
+	+ -topcomboN=20
+	+ -hspsepsmax=# (A.thaliana 2000)
+	+ -cpus=8
+	+ -E 
+	+ -mformat 2 maybe 3
+
+```
+ab-blast-20200317-linux-x64/tblastn* Code/retrogenome/Arabidopsis_thaliana.TAIR10.dna_sm.toplevel.fa Code/retrogenome/Arabidopsis_thaliana.proteins.fa  -topcomboN=20 -hspsepsmax=2000 -cpus=15 -E 1e-30 -mformat 3 & > tabbularab
+```
+
+What to look for 
+
+High percentage identity
+Noticeable gaps where introns should be 
+
+
+
+
+
+
+
+
+
