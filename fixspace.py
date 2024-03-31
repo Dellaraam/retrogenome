@@ -7,3 +7,4 @@ with gzip.open(sys.argv[1], 'rt') as fp:
 		if line.startswith(">"):
 			line.replace(" ", "_")
 		print(line, end="")
+
