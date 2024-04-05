@@ -33,7 +33,6 @@ def overlap(b1, e1, b2, e2):
 	if end > beg: return end - beg + 1
 	return 0
 
-
 def gcompare(exons, aligns):
 	total_exp = 0
 	total_obs = 0
@@ -65,6 +64,19 @@ def pcompare(exons, aligns):
 		total_obs += maxover
 	return total_exp, total_obs
 
+def astats(grp):
+	qmin = 1e9
+	qmax = 0
+	smin = 1e9
+	smax = 0
+	for qb, qe, sb, se, st, sc, e, pct in grp:
+		if qb < qmin: qmin = qb
+		if qe > qmax: qmax = qe
+		if sb < smin: smin = sb
+		if se > smax: smax = se
+	return smin, smax, qmin, qmax
+
+
 search = {}
 with open(sys.argv[1]) as fp:
 	for line in fp:
@@ -80,31 +92,57 @@ with open(sys.argv[1]) as fp:
 			float(e), float(pct))
 		search[qid][sid][grp].append(align)
 
+# reorganize under gene
+gene = {}
 for qid in search:
-	print(qid[:25])
-	f = qid.split('|') # remove later
-	if len(f) != 7: continue # remove later
+	ginfo = qid.split('|')
+	gid, tid = ginfo[0], ginfo[1]
 	gexons, pexons = get_exons_from_defline(qid)
+	if gid not in gene: gene[gid] = {}
+	if tid not in gene[gid]: gene[gid][tid] = {}
 
 	for sid in search[qid]:
-		print('\tsid', sid)
+		if sid not in gene[gid][tid]: gene[gid][tid][sid] = {}
 		for grp in search[qid][sid]:
-			print('\t\tgroup', grp, len(search[qid][sid][grp]))
-			x, y = gcompare(gexons, search[qid][sid][grp])
-			print('\t\t\t',x, y, y/x, sb, se)
-			x, y = pcompare(pexons, search[qid][sid][grp])
-			print('\t\t\t', x, y, y/x, qb, qe)
-			
-# Chromosome: " "		
-	# Group: " " 
-		# Alignments: " " 
-		# PercentId: " "
-			# Beg 
-			# End  
+			gx, gy = gcompare(gexons, search[qid][sid][grp])
+			px, py = pcompare(pexons, search[qid][sid][grp])
+			gbeg, gend, pbeg, pend = astats(search[qid][sid][grp])
+			gene[gid][tid][sid][grp] = {
+				'gpct': gy/gx,
+				'ppct': py/px,
+				'gbeg': gbeg,
+				'gend': gend,
+				'pbeg': pbeg,
+				'pend': pend,
+				'hsps': len(search[qid][sid][grp]),
+			}
 
-# original has high alignments 
-# targets have notable decreases in alignments 
-# look for genes with multiple groups 
+for gid in gene:
+	for tid in gene[gid]:
+		for sid in gene[gid][tid]:
+			for grp in gene[gid][tid][sid]:
+				x = gene[gid][tid][sid][grp]
+				b = x['gbeg']
+				e = x['gend']
+				g = x['gpct']
+				p = x['ppct']
+				l = x['pend'] - x['pbeg'] + 1
+				n = x['hsps']
+				print(gid, tid, f'{g:.3f}', f'{p:.3f}', l, n, f'{sid}:{b}-{e}')
+	print()
+
+
+
+# Chromosome: " "
+	# Group: " "
+		# Alignments: " "
+		# PercentId: " "
+			# Beg
+			# End
+
+# original has high alignments
+# targets have notable decreases in alignments
+# look for genes with multiple groups
 # look for genes that have matches in multiple chromosomes
 # find enough of the protein glue all the alignments together in a group(How long is that? NOT TO SHORT)
 # make coordinates Chr3:2345..6789
