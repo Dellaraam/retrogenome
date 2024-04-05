@@ -89,8 +89,37 @@ for qid in search:
 	for sid in search[qid]:
 		print('\tsid', sid)
 		for grp in search[qid][sid]:
-			print('\t\tgroup', grp)
+			print('\t\tgroup', grp, len(search[qid][sid][grp]))
 			x, y = gcompare(gexons, search[qid][sid][grp])
-			print('\t\t\t',x, y, y/x)
+			print('\t\t\t',x, y, y/x, sb, se)
 			x, y = pcompare(pexons, search[qid][sid][grp])
-			print('\t\t\t', x, y, y/x)
+			print('\t\t\t', x, y, y/x, qb, qe)
+			
+# Chromosome: " "		
+	# Group: " " 
+		# Alignments: " " 
+		# PercentId: " "
+			# Beg 
+			# End  
+
+# original has high alignments 
+# targets have notable decreases in alignments 
+# look for genes with multiple groups 
+# look for genes that have matches in multiple chromosomes
+# find enough of the protein glue all the alignments together in a group(How long is that? NOT TO SHORT)
+# make coordinates Chr3:2345..6789
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
