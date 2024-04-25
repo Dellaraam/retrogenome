@@ -1,5 +1,7 @@
 from subprocess import run
 import argparse
+import gzip
+import sys
 
 
 # setup
@@ -21,5 +23,13 @@ parser.add_argument('--mformat', required=False, type=str, default='3')
 
 output = sys.argv[1]
 alignnments = run(f'ab-blast-20200317-linux-x64/tblastn* {arg.query} {arg.database}  -topcomboN={arg.n} -hspsepsmax={arg.hsp} -cpus={arg.cpu} -E {arg.evalue} -mformat {arg.mformat} & > {output}')
+
+zipg = run(f'gzip {output}')
+
+with gzip.open(f'output'.gz, 'rt') as fp:
+	for line in fp:
+		if line.startswith(">"):
+			line = line.replace(" ", "_")
+		print(line, end="")
 
 	
