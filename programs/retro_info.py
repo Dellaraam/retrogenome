@@ -26,13 +26,15 @@ with gzip.open(sys.argv[2], "rt") as fp2:
 		end = l2[2]
 		intron = l2[5]
 		#print(gene)
+		if read != "1": continue 
 		for retro in retrolist.keys():
 			if gene == retro:
 				f1.write(f'>{gene}.{read} {start}-{end}\n')
 				f1.write(f'{intron}\n')
-			if parent in parentlist.keys():
-				f1.write(f'>{gene}.{read} {start}-{end}\n')
-				f1.write(f'{intron}\n')
+		for parent in parentlist.keys():
+			if gene == parent:
+				f2.write(f'>{gene}.{read} {start}-{end}\n')
+				f2.write(f'{intron}\n')
 	
 		
 #print(retrolist, parentlist)
